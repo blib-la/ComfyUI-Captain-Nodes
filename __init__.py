@@ -19,9 +19,11 @@ def do_install():
     except Exception as e:
         print(f"Captain says: Failed to install dependencies: {str(e)}")
 
+# Install dependencies before loading any custom nodes
 do_install()
 
-node_list = [ #Add list of .py files containing nodes here
+# List of node files
+node_list = [ 
     "join_text",
     "openai_chat",
     "openai_image_analysis",
@@ -33,10 +35,14 @@ NODE_DISPLAY_NAME_MAPPINGS = {}
 
 for module_name in node_list:
     module_path = ".nodes." + module_name  # Adjusted to include the subfolder
-    imported_module = importlib.import_module(module_path, __name__)
-
-    NODE_CLASS_MAPPINGS = {**NODE_CLASS_MAPPINGS, **imported_module.NODE_CLASS_MAPPINGS}
-    if hasattr(imported_module, "NODE_DISPLAY_NAME_MAPPINGS"):
-        NODE_DISPLAY_NAME_MAPPINGS = {**NODE_DISPLAY_NAME_MAPPINGS, **imported_module.NODE_DISPLAY_NAME_MAPPINGS}
+    try:
+        imported_module = importlib.import_module(module_path, __name__)
+        NODE_CLASS_MAPPINGS = {**NODE_CLASS_MAPPINGS, **imported_module.NODE_CLASS_MAPPINGS}
+        if hasattr(imported_module, "NODE_DISPLAY_NAME_MAPPINGS"):
+            NODE_DISPLAY_NAME_MAPPINGS = {**NODE_DISPLAY_NAME_MAPPINGS, **imported_module.NODE_DISPLAY_NAME_MAPPINGS}
+    except ModuleNotFoundError as e:
+        print(f"Captain says: Failed to load module {module_name}. Error: {e}")
+    except Exception as e:
+        print(f"Captain says: An error occurred while loading module {module_name}. Error: {e}")
 
 __all__ = ['NODE_CLASS_MAPPINGS', 'NODE_DISPLAY_NAME_MAPPINGS']
