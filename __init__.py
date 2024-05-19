@@ -1,15 +1,16 @@
 import importlib
 import os
 import shutil
+import folder_paths
 
 
-comfy_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-captain_path = os.path.abspath(os.path.dirname(__file__))
+comfy_path = os.path.dirname(folder_paths.__file__)
+captain_nodes_path = os.path.abspath(os.path.dirname(__file__))
 
 def setup_js():
     try:
         js_dest_path = os.path.join(comfy_path, "web", "extensions",  "ComfyUI-Captain-Nodes")
-        js_src_path = os.path.join(captain_path, "extensions")
+        js_src_path = os.path.join(captain_nodes_path, "extensions")
         print(js_src_path)
         print(js_dest_path)
         if os.path.exists(js_dest_path):
