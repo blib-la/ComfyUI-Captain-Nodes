@@ -43,8 +43,6 @@ class PreviewText:
         """
         return {"ui": {"string": [text]}, "result": (text,)}
 
-# WEB_DIRECTORY = "../web"
-
 NODE_CLASS_MAPPINGS = {
     "Captain__PreviewText": PreviewText
 }

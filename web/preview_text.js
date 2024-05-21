@@ -2,6 +2,7 @@ import {app} from "/scripts/app.js";
 import {ComfyWidgets} from "/scripts/widgets.js";
 import {PREVIEW_TEXT_NODE_NAME} from "./constants.js";
 
+console.log(`Captain Node: ${PREVIEW_TEXT_NODE_NAME} extension loaded`)
 /**
  * Captain.previewText extension for enhancing the PreviewText node.
  * Adds custom string widget functionality for displaying output text.
