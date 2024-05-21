@@ -15,7 +15,7 @@ class ImageToBase64:
 
     RETURN_TYPES = ("STRING",)
     FUNCTION = "image_to_base64"
-    CATEGORY = "Captain/Image"
+    CATEGORY = "🧑‍✈️ Captain/🖼️ Image"
 
     def image_to_base64(self, image):
         """Converts an image to a Base64 string.
@@ -51,9 +51,9 @@ class ImageToBase64:
             return ("Failed to convert image",)
 
 NODE_CLASS_MAPPINGS = {
-    "ImageToBase64": ImageToBase64,
+    "Captain__ImageToBase64": ImageToBase64,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "ImageToBase64": "Convert Image to Base64",
+    "Captain__ImageToBase64": "🧑‍✈️ Convert Image to Base64",
 }

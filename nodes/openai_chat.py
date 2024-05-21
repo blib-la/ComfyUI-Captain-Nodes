@@ -1,4 +1,3 @@
-import json
 from openai import OpenAI
 
 class OpenAIChat:
@@ -22,7 +21,7 @@ class OpenAIChat:
     """
     FUNCTION = "execute"
     RETURN_TYPES = ("STRING",)
-    CATEGORY = "Captain/Chat"
+    CATEGORY = "🧑‍✈️ Captain/💬 LLM"
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -30,7 +29,7 @@ class OpenAIChat:
             "required": {
                 "api_key": ("STRING", {
                     "multiline": False,
-                    "default": "Enter your OpenAI API key"
+                    "default": "sk-xxxxxxxxxx"
                 }),
                  "model": (["gpt-3.5-turbo", "gpt-4", "gpt-4-turbo", "gpt-4o"], {
                     "default": "gpt-3.5-turbo"
@@ -50,11 +49,6 @@ class OpenAIChat:
             },
         }
 
-    ## @classmethod
-    ## def IS_CHANGED(cls):
-    ##     # Force re-evaluation of the node
-    ##     return float("NaN")
-    
     def execute(self, api_key, model, system_message, user_message, seed):
         """ Sends formatted messages to OpenAI API using the provided API key and prints the response.
 
@@ -63,13 +57,14 @@ class OpenAIChat:
         model (str): The OpenAI model.
         system_message (str): The message from the system.
         user_message (str): The message from the user.
+        seed (str): The seed of the generation.
 
         Returns:
         tuple: Contains the response from the API.
         """
     
         client = OpenAI(
-            api_key=api_key
+            api_key = api_key
         )
 
         messages = [
@@ -78,14 +73,15 @@ class OpenAIChat:
         ]
         completion = client.chat.completions.create(
             model = model,
-            messages = messages
+            messages = messages,
+            seed = seed
         )
         return (completion.choices[0].message.content,)
 
 NODE_CLASS_MAPPINGS = {
-    "OpenAIChat": OpenAIChat
+    "Captain__OpenAIChat": OpenAIChat
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "OpenAIChat": "OpenAI Chat"
+    "Captain__OpenAIChat": "🧑‍✈️ OpenAI Chat"
 }

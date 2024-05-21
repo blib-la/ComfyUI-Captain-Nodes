@@ -2,6 +2,10 @@
 
 Welcome to the ComfyUI Captain Nodes repository! This collection of nodes enhances [Captain](https://get-captain.com)—a desktop tool that allows you to run AI models locally on your computer. With Captain, you can quickly start applications, search data using natural language, and build custom AI apps, all while keeping your data private and offline.
 
+<div align="center">
+  <img src="https://github.com/blib-la/ComfyUI-Captain-Nodes/assets/1148334/01c09224-6788-438d-a006-2bae4afcd78a" alt="nodes example"/ >
+</div>
+
 ## Features of ComfyUI Captain Nodes
 
 This package extends Captain's capabilities by providing specialized nodes for AI integration and utility functions, making it easier to harness powerful AI features directly on your desktop:
@@ -10,6 +14,7 @@ This package extends Captain's capabilities by providing specialized nodes for A
 
 - **[Image to Base64](nodes/image_to_base64.py)**: Converts images to Base64, facilitating easier image handling and storage.
 - **[Join Text](nodes/join_text.py)**: Combines multiple text inputs into one string, simplifying data aggregation.
+- **[Preview Text](nodes/previw_text.py)**: Outputs a preview of the generated text and passes it through.
 - **[OpenAI Chat](nodes/openai_chat.py)**: Integrates OpenAI’s conversational models to enable dynamic interactions with AI.
 - **[OpenAI Image Analysis](nodes/openai_image_analysis.py)**: Utilizes AI to analyze and interpret images, providing detailed insights and descriptions.
 

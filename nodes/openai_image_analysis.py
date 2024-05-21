@@ -1,6 +1,7 @@
 import json
 from openai import OpenAI
 
+
 class ImageAnalysis:
     """
     A node that creates a formatted message object with a system message and a user message,
@@ -22,7 +23,7 @@ class ImageAnalysis:
     """
     FUNCTION = "execute"
     RETURN_TYPES = ("STRING",)
-    CATEGORY = "Captain/Chat"
+    CATEGORY = "🧑‍✈️ Captain/💬 LLM"
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -30,9 +31,9 @@ class ImageAnalysis:
             "required": {
                 "api_key": ("STRING", {
                     "multiline": False,
-                    "default": "Enter your OpenAI API key"
+                    "default": "sk-xxxxxxxxxx"
                 }),
-                 "model": (["gpt-4-vision-preview", "gpt-4o"], {
+                "model": (["gpt-4-vision-preview", "gpt-4o"], {
                     "default": "gpt-4o"
                 }),
                 "system_message": ("STRING", {
@@ -43,14 +44,17 @@ class ImageAnalysis:
                     "multiline": True,
                     "default": "User message goes here."
                 }),
+                "seed": ("INT", {
+                    "default": 0,
+                    "display": "number"
+                }),
                 "base64": ("STRING", {
                     "multiline": True,
-                    "default": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
-                }),
+                })
             },
         }
 
-    def execute(self, api_key, model, system_message, user_message, base64):
+    def execute(self, api_key, model, system_message, user_message, seed, base64):
         """ Sends formatted messages to OpenAI API using the provided API key and prints the response.
 
         Parameters:
@@ -58,12 +62,13 @@ class ImageAnalysis:
         model (str): The OpenAI model.
         system_message (str): The message from the system.
         user_message (str): The message from the user.
+        seed (str): The seed of the generation.
         base64 (str): The image from the user.
 
         Returns:
         tuple: Contains the response from the API.
         """
-    
+
         client = OpenAI(
             api_key=api_key
         )
@@ -84,15 +89,17 @@ class ImageAnalysis:
             }
         ]
         completion = client.chat.completions.create(
-            model = model,
-            messages = messages
+            model=model,
+            messages=messages,
+            seed=seed
         )
         return (completion.choices[0].message.content,)
 
+
 NODE_CLASS_MAPPINGS = {
-    "ImageAnalysis": ImageAnalysis
+    "Captain__ImageAnalysis": ImageAnalysis
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "ImageAnalysis": "OpenAI Image Analysis"
+    "Captain__ImageAnalysis": "🧑‍✈️ OpenAI Image Analysis"
 }

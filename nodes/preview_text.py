@@ -19,7 +19,7 @@ class PreviewText:
     FUNCTION = "preview_text"
     RETURN_TYPES = ("STRING",)
     OUTPUT_NODE = True
-    CATEGORY = "Captain/Utilities"
+    CATEGORY = "🧑‍✈️ Captain/🛠️ Utilities"
 
     def __init__(self):
         pass
@@ -29,30 +29,26 @@ class PreviewText:
         return {
             "required": {
                 "text": ("STRING", {"forceInput": True}),
-            },
-            "hidden": {
-                "prompt": "PROMPT",
-                "extra_pnginfo": "EXTRA_PNGINFO"
-            },
+            }
         }
 
-    def preview_text(self, text, prompt=None, extra_pnginfo=None):
+    def preview_text(self, text):
         """ Previews the given text.
 
         Parameters:
         text (str): The text to preview.
-        prompt (str, optional): The prompt associated with the text.
-        extra_pnginfo (str, optional): Additional PNG info.
 
         Returns:
         dict: Contains the preview text in the UI and the result text.
         """
         return {"ui": {"string": [text]}, "result": (text,)}
 
+# WEB_DIRECTORY = "../web"
+
 NODE_CLASS_MAPPINGS = {
-    "PreviewText": PreviewText
+    "Captain__PreviewText": PreviewText
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "PreviewText": "Preview Text"
+    "Captain__PreviewText": "🧑‍✈️ Preview Text"
 }

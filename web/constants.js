@@ -1,0 +1,1 @@
+export const PREVIEW_TEXT_NODE_NAME = "Captain__PreviewText"

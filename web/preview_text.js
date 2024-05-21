@@ -1,12 +1,13 @@
-import { app } from "/scripts/app.js";
-import { ComfyWidgets } from "/scripts/widgets.js";
+import {app} from "/scripts/app.js";
+import {ComfyWidgets} from "/scripts/widgets.js";
+import {PREVIEW_TEXT_NODE_NAME} from "./constants.js";
 
 /**
  * Captain.previewText extension for enhancing the PreviewText node.
  * Adds custom string widget functionality for displaying output text.
  */
 app.registerExtension({
-  name: "Captain.previewText",
+  name: `Blibla.${PREVIEW_TEXT_NODE_NAME}`,
 
   /**
    * Hook into the node definition registration process.
@@ -16,7 +17,7 @@ app.registerExtension({
    * @param {Object} app - The application instance.
    */
   async beforeRegisterNodeDef(nodeType, nodeData, app) {
-    if (nodeData.name === "PreviewText") {
+    if (nodeData.name === PREVIEW_TEXT_NODE_NAME) {
       const originalOnNodeCreated = nodeType.prototype.onNodeCreated;
 
       /**
@@ -41,7 +42,7 @@ app.registerExtension({
             "STRING",
             {
               default: "",
-              placeholder: "Text message output...",
+              placeholder: "The output will appear here...",
               multiline: true,
             },
           ],
@@ -64,8 +65,8 @@ app.registerExtension({
 
           if (Array.isArray(texts)) {
             texts = texts
-              .filter((text) => text.trim() !== "")
-              .map((text) => text.trim())
+              .map((text) => text.replace(/\s+/, " ").trim())
+              .filter(Boolean)
               .join(" ");
           }
 
@@ -82,8 +83,12 @@ app.registerExtension({
        * @param {Object} texts - The texts returned from node execution.
        */
       nodeType.prototype.onExecuted = function (texts) {
-        originalOnExecuted?.apply(this, arguments);
-        updateWidgetValue.call(this, texts?.string);
+        if (originalOnExecuted) {
+          originalOnExecuted.apply(this, arguments);
+        }
+        if (texts) {
+          updateWidgetValue.call(this, texts.string);
+        }
       };
 
       const originalOnConfigure = nodeType.prototype.onConfigure;

@@ -1,4 +1,4 @@
-class JoinTextsNode:
+class JoinTexts:
     """
     A node that joins two input strings with a newline.
 
@@ -18,7 +18,7 @@ class JoinTextsNode:
     """
     FUNCTION = "execute"
     RETURN_TYPES = ("STRING",)
-    CATEGORY = "Captain/Utilities"
+    CATEGORY = "🧑‍✈️ Captain/🛠️ Utilities"
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -32,30 +32,36 @@ class JoinTextsNode:
                     "multiline": True,
                     "default": "Second String"
                 }),
-                 "delimiter": ("STRING", {
+                "delimiter": ("STRING", {
                     "multiline": False,
                     "default": ", "
+                }),
+                "add_newline": ("BOOLEAN", {
+                    "default": False
                 }),
             },
         }
 
-    def execute(self, first_string, second_string, delimiter):
+    def execute(self, first_string, second_string, delimiter, add_newline):
         """ Joins two strings with a newline.
 
         Parameters:
         first_string (str): The first string to join.
         second_string (str): The second string to join.
         delimiter (str): The delimiter used to join the two strings.
+        add_newline (bool): Adds a newline after the delimiter.
 
         Returns:
         tuple: Contains the joined strings.
         """
+        if add_newline:
+            delimiter += "\n"
         return (f"{first_string}{delimiter}{second_string}",)
 
 NODE_CLASS_MAPPINGS = {
-    "JoinTextsNode": JoinTextsNode
+    "Captain__JoinTexts": JoinTexts
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "JoinTextsNode": "Join Texts Node"
+    "Captain__JoinTexts": "🧑‍✈️ Join Texts"
 }
