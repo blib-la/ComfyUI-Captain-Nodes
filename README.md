@@ -8,6 +8,9 @@ Welcome to the ComfyUI Captain Nodes repository! This collection of nodes enhanc
 
 ## Features of ComfyUI Captain Nodes
 
+> [!NOTE]
+> This set of nodes is compatible with a native ComfyUI installation
+
 This package extends Captain's capabilities by providing specialized nodes for AI integration and utility functions, making it easier to harness powerful AI features directly on your desktop:
 
 ### Included Nodes
